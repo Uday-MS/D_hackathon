@@ -1,0 +1,13 @@
+Flask>=2.0
+flask-cors
+python-dotenv
+requests
+numpy
+pillow
+geopy
+pandas
+torch>=1.13.0   # if you can't install, remove torch and skip training step
+torchvision
+sentence-transformers
+scikit-learn
+twilio
