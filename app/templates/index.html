@@ -1,0 +1,104 @@
+{% extends "base.html" %}
+{% block content %}
+
+<div class="d-flex justify-content-between align-items-center mb-3">
+  <h3 class="mb-0">FloodWatch — Live</h3>
+  <div>
+    <button class="btn btn-sm btn-outline-secondary" onclick="location.reload()">Refresh</button>
+  </div>
+</div>
+
+<div class="row gx-3">
+
+  <!-- LEFT: Map -->
+  <div class="col-lg-7">
+    <div class="card shadow-sm">
+      <div class="card-body p-0">
+        <div id="map" style="height:70vh;"></div>
+      </div>
+      <div class="card-footer d-flex gap-3 align-items-center">
+        <div class="form-check form-switch mb-0">
+          <input class="form-check-input" type="checkbox" id="toggleOverlay" checked>
+          <label class="form-check-label">Flood overlay</label>
+        </div>
+        <label class="mb-0 ms-2">Opacity</label>
+        <input id="overlayOpacity" type="range" min="0" max="1" step="0.05" value="0.55" style="width:150px">
+      </div>
+    </div>
+  </div>
+
+  <!-- RIGHT: Controls -->
+  <div class="col-lg-5">
+    <div class="card shadow-sm mb-3">
+      <div class="card-body">
+        <div class="d-flex justify-content-between align-items-start">
+          <div>
+            <h5 class="mb-0">Risk Score</h5>
+            <small class="text-muted">Multi-modal fusion</small>
+          </div>
+          <div class="text-end">
+            <div id="riskGauge" class="display-6 text-danger">--</div>
+            <div id="riskLevel" class="small text-muted">--</div>
+          </div>
+        </div>
+
+        <hr>
+
+        <div class="d-grid gap-2">
+          <button id="computeBtn" class="btn btn-primary">Compute Risk</button>
+          <button id="alertBtn" class="btn btn-outline-danger">Send Residents Alert (simulate)</button>
+        </div>
+
+        <hr>
+
+        <h6>Why?</h6>
+        <div id="reasonsContainer" class="small mb-2"></div>
+
+        <h6 class="mt-3">Local Reports</h6>
+        <div style="max-height:200px; overflow:auto;">
+          <ul id="socialFeed" class="list-group list-group-flush"></ul>
+        </div>
+
+      </div>
+    </div>
+
+    <div class="card shadow-sm border-danger">
+      <div class="card-body text-center">
+        <h5 class="text-danger">Emergency</h5>
+        <p class="small text-muted">Hold to send SOS to nearest responders</p>
+        <button id="sosButton" class="btn btn-danger btn-lg rounded-pill">HOLD</button>
+        <div id="sosStatus" class="mt-2 small text-muted"></div>
+      </div>
+    </div>
+
+    <div class="mt-3 d-flex gap-2">
+      <button id="voiceBtn" class="btn btn-dark">🎙️ Voice Assistant</button>
+      <button id="openShelters" class="btn btn-outline-primary" onclick="location.href='/shelters'">Open Shelters</button>
+    </div>
+  </div>
+</div>
+
+<!-- SOS Confirm Modal -->
+<div class="modal fade" id="sosModal" tabindex="-1" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content border-danger">
+      <div class="modal-header bg-danger text-white">
+        <h5 class="modal-title">Confirm SOS</h5>
+        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+      </div>
+      <div class="modal-body">
+        <p>Send SOS to nearest responders and request immediate rescue?</p>
+        <p class="small text-muted">You will have 10s to cancel.</p>
+        <div id="sosModalProgress" class="small text-muted"></div>
+      </div>
+      <div class="modal-footer">
+        <button id="confirmSosBtn" class="btn btn-danger">Confirm</button>
+        <button class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>window.SHOW_HOME_PAGE = true;</script>
+
+{% endblock %}

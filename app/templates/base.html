@@ -1,0 +1,41 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <title>FloodWatch</title>
+
+  <!-- CSS -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css">
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+</head>
+
+<body>
+
+<nav class="navbar navbar-dark bg-primary px-3">
+  <a class="navbar-brand d-flex align-items-center" href="/">
+    <img src="{{ url_for('static', filename='assets/logo.png') }}" style="height:32px; margin-right:8px;">
+    FloodWatch
+  </a>
+
+  <div>
+    <a href="/" class="btn btn-light btn-sm">Home</a>
+    <a href="/shelters" class="btn btn-light btn-sm">Shelters</a>
+    <a href="/admin" class="btn btn-light btn-sm">Admin</a>
+    <a href="/logs" class="btn btn-light btn-sm">Logs</a>
+  </div>
+</nav>
+
+<main class="container-fluid mt-3">
+  {% block content %}{% endblock %}
+</main>
+
+<!-- JS -->
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+<script src="{{ url_for('static', filename='js/main.js') }}"></script>
+
+</body>
+</html>
