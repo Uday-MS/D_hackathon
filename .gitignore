@@ -1,0 +1,11 @@
+# ignore virtual env and heavy files
+myenv/
+venv/
+env/
+__pycache__/
+*.dll
+*.pkl
+*.pt
+*.h5
+artifacts/
+data/
